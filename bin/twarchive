@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require "fileutils"
+
+require "twitpic/client"
+require "twitpic/version"
+
+require "slop"
+
+Slop.parse help: true do
+  banner "Usage: twarchive [username] [output_path]"
+
+  on "-v", "Print version number and exit" do
+    puts Twitpic::VERSION
+    exit
+  end
+end
+
+username = ARGV[0]
+if !username
+  $stderr.puts "No username provided!"
+  exit 64
+end
+
+path = File.expand_path(ARGV[1])
+if !path
+  $stderr.puts "No output path was provided!"
+  exit 64
+end
+
+begin
+  FileUtils.mkdir_p path
+rescue Errno::EACCES
+  $stderr.puts "Unable to create output directory #{path}"
+  exit 73
+end
+
+client = Twitpic::Client.new
+user = client.user(username)
+File.open(File.join(path, "#{username}.json"), "w") {|f| f.write user.to_json}
+
+user.each_image.with_index do |i, count|
+  puts "Downloading ##{count + 1}: #{i.id}"
+  i.download path
+  sleep(1)
+end
