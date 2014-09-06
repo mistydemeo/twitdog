@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/twitpic/version', __FILE__)
+require File.expand_path('../lib/twitdog/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Misty De Meo"]
@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "twitdog"
   gem.require_paths = ["lib"]
-  gem.version       = Twitpic::VERSION
+  gem.version       = Twitdog::VERSION
 
   gem.add_dependency 'slop', '>= 3.6.0'
 

@@ -2,8 +2,8 @@
 
 require "fileutils"
 
-require "twitpic/client"
-require "twitpic/version"
+require "twitdog/client"
+require "twitdog/version"
 
 require "slop"
 
@@ -11,7 +11,7 @@ Slop.parse help: true do
   banner "Usage: twarchive [username] [output_path]"
 
   on "-v", "Print version number and exit" do
-    puts Twitpic::VERSION
+    puts Twitdog::VERSION
     exit
   end
 end
@@ -35,7 +35,7 @@ rescue Errno::EACCES
   exit 73
 end
 
-client = Twitpic::Client.new
+client = Twitdog::Client.new
 user = client.user(username)
 File.open(File.join(path, "#{username}.json"), "w") {|f| f.write user.to_json}
 

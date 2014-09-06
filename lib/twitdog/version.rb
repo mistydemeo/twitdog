@@ -1,3 +1,3 @@
-module Twitpic
+module Twitdog
   VERSION = "0.1"
 end

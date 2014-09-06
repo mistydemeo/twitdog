@@ -1,7 +1,7 @@
 require "httparty"
 require "open-uri"
 
-module Twitpic
+module Twitdog
   class Client
     include HTTParty
     format :json
